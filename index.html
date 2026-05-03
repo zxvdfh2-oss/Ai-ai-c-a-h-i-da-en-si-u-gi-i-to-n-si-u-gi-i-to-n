@@ -1,0 +1,72 @@
+# Ai-ai-c-a-h-i-da-en-si-u-gi-i-to-n-si-u-gi-i-to-n <!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>NINJA MATH-BOSS AI</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/11.8.0/math.js"></script>
+    <style>
+        body { background: #000; color: #00ff41; font-family: 'Courier New', monospace; text-align: center; padding: 50px; }
+        .ai-core { 
+            width: 200px; height: 200px; border: 4px solid #4285F4; border-radius: 50%; 
+            margin: auto; box-shadow: 0 0 50px #4285F4; display: flex; align-items: center; justify-content: center;
+            transition: 0.3s;
+        }
+        .processing { border-color: #ff0000; box-shadow: 0 0 80px #ff0000; transform: scale(1.1); }
+        input { width: 80%; padding: 20px; background: #111; border: 1px solid #4285F4; color: #fff; margin-top: 30px; font-size: 1.2rem; border-radius: 10px; outline: none; }
+        #result-box { margin-top: 20px; font-size: 1.5rem; font-weight: bold; color: #ffd700; min-height: 50px; }
+    </style>
+</head>
+<body>
+
+    <div style="color: #4285F4; font-size: 0.8rem; letter-spacing: 5px;">GEMINI x NINJA ALGORITHM</div>
+    <h1>NINJA MATH-BOSS AI</h1>
+    
+    <div class="ai-core" id="core">
+        <div style="width: 20px; height: 20px; background: #fff; border-radius: 50%;"></div>
+    </div>
+
+    <input type="text" id="mathInput" placeholder="Nhập bài toán (Dễ: 1+1 | Khó: derivative('x^2', 'x'))">
+    <div id="result-box">ĐANG CHỜ BÀI TOÁN...</div>
+
+    <script>
+        const input = document.getElementById('mathInput');
+        const core = document.getElementById('core');
+        const resBox = document.getElementById('result-box');
+
+        input.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                const problem = this.value;
+                if(!problem) return;
+
+                // 1. BOSS VÀO TRẠNG THÁI PHÂN TÍCH
+                core.classList.add('processing');
+                resBox.innerText = "ĐANG GIẢI TOÁN...";
+                resBox.style.color = "#ff0000";
+
+                // 2. ĐÚNG 2 GIÂY TRẢ KẾT QUẢ
+                setTimeout(() => {
+                    try {
+                        // SỬ DỤNG ENGINE TOÁN HỌC MẠNH NHẤT
+                        const answer = math.evaluate(problem);
+                        
+                        // Định dạng kết quả nếu là ma trận hoặc số phức
+                        const finalAnswer = math.format(answer, { precision: 14 });
+
+                        resBox.innerText = "ĐÁP SỐ: " + finalAnswer;
+                        resBox.style.color = "#ffd700";
+                        
+                        // Hiệu ứng hoàn thành
+                        core.classList.remove('processing');
+                        console.log("Ninja Math-Boss has solved it!");
+
+                    } catch (err) {
+                        resBox.innerText = "BÀI TOÁN QUÁ KHÓ HOẶC SAI CÚ PHÁP!";
+                        resBox.style.color = "#888";
+                        core.classList.remove('processing');
+                    }
+                }, 2000);
+            }
+        });
+    </script>
+</body>
+</html>
